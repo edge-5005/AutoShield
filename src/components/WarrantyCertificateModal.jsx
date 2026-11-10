@@ -1,9 +1,15 @@
 import React from 'react';
 import { X, Award, ShieldCheck, Printer, Calendar, CheckCircle } from 'lucide-react';
 import { formatDate } from '../utils/formatters';
+import { useAuth } from '../context/AuthContext';
 
 export default function WarrantyCertificateModal({ isOpen, onClose, invoice }) {
   if (!isOpen || !invoice) return null;
+
+  const { currentCompany } = useAuth();
+  const { settings = {} } = invoice;
+  const logo = settings.logo_url || currentCompany?.logo_url;
+  const studioName = settings.studio_name || currentCompany?.name || 'Apex Auto Detailing Studio';
 
   const items = typeof invoice.items === 'string' ? JSON.parse(invoice.items) : (invoice.items || []);
   const warrantyItem = items.find(i => Number(i.warranty_months) > 0) || items[0] || {};
@@ -52,11 +58,21 @@ export default function WarrantyCertificateModal({ isOpen, onClose, invoice }) {
           </div>
 
           <div className="text-center relative z-10">
-            <div className="inline-flex items-center justify-center p-3 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-3">
-              <Award className="w-8 h-8" />
-            </div>
+            {logo ? (
+              <div className="w-20 h-20 mx-auto rounded-2xl bg-slate-900/90 border border-amber-500/40 p-2.5 mb-3 flex items-center justify-center shadow-lg">
+                <img src={logo} alt={studioName} className="w-full h-full object-contain" />
+              </div>
+            ) : (
+              <div className="inline-flex items-center justify-center p-3 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-3">
+                <Award className="w-8 h-8" />
+              </div>
+            )}
 
-            <h1 className="text-2xl font-black uppercase tracking-widest text-amber-400">
+            <p className="text-[11px] font-black uppercase tracking-widest text-amber-400/90 mb-1">
+              {studioName}
+            </p>
+
+            <h1 className="text-2xl font-black uppercase tracking-widest text-white">
               Certificate of Protection & Warranty
             </h1>
             <p className="text-xs uppercase tracking-widest text-slate-400 mt-1 font-mono">

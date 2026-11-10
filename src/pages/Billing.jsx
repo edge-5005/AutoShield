@@ -19,8 +19,10 @@ import { formatCurrency, formatDate, getPaymentBadge } from '../utils/formatters
 import InvoicePrintModal from '../components/InvoicePrintModal';
 import WarrantyCertificateModal from '../components/WarrantyCertificateModal';
 import WhatsAppShareModal from '../components/WhatsAppShareModal';
+import { useAuth } from '../context/AuthContext';
 
 export default function Billing() {
+  const { currentCompany } = useAuth();
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [typeFilter, setTypeFilter] = useState('all');
@@ -126,21 +128,34 @@ export default function Billing() {
     <div className="p-8 space-y-6 max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
-            <Receipt className="w-6 h-6 text-blue-500" />
-            <span>Billing, Invoices & Estimates</span>
-          </h1>
-          <p className="text-xs text-slate-400 mt-1">
-            GST-compliant invoices (SAC 9987), payments, advance deposits & warranty cards
-          </p>
+        <div className="flex items-center gap-3.5">
+          {currentCompany?.logo_url ? (
+            <div className="w-12 h-12 rounded-2xl bg-carbon-900 border border-amber-500/30 p-1 flex items-center justify-center shrink-0 shadow-sm">
+              <img src={currentCompany.logo_url} alt="Logo" className="w-full h-full object-contain" />
+            </div>
+          ) : (
+            <div className="w-11 h-11 rounded-2xl bg-carbon-900 border border-carbon-800 flex items-center justify-center text-amber-400 shrink-0">
+              <Receipt className="w-6 h-6 text-amber-400" />
+            </div>
+          )}
+          <div>
+            <h1 className="text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
+              <span>Billing, Invoices & Estimates</span>
+              <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-lg">
+                {currentCompany?.name || 'Studio'}
+              </span>
+            </h1>
+            <p className="text-xs text-slate-400 mt-0.5">
+              GST-compliant invoices (SAC 9987), payments, advance deposits & warranty cards
+            </p>
+          </div>
         </div>
 
         <Link
           to="/billing/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-carbon-950 text-xs font-black shadow-ceramic transition-all transform active:scale-95"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-carbon-950 stroke-[3]" />
           <span>New Invoice / Estimate</span>
         </Link>
       </div>

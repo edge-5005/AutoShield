@@ -22,7 +22,11 @@ export default function Navbar() {
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-carbon-950/80 hover:bg-carbon-950 border border-carbon-700/80 text-left transition-all group"
           title="Click to switch company or login as Admin / Front Office"
         >
-          <Building2 className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+          {currentCompany?.logo_url ? (
+            <img src={currentCompany.logo_url} alt="Logo" className="w-5 h-5 rounded object-contain shrink-0" />
+          ) : (
+            <Building2 className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+          )}
           <div className="truncate max-w-[160px] sm:max-w-[240px]">
             <h1 className="text-xs font-bold text-white tracking-wide truncate">
               {currentCompany?.name || 'Apex Auto Detailing Studio'}

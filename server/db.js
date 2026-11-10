@@ -144,6 +144,7 @@ function createSchema() {
       gstin TEXT DEFAULT '29AABCA1234D1Z5',
       state_code TEXT DEFAULT '29',
       state_name TEXT DEFAULT 'Karnataka',
+      logo_url TEXT,
       bank_name TEXT DEFAULT 'HDFC Bank Ltd',
       account_number TEXT DEFAULT '50200012345678',
       ifsc_code TEXT DEFAULT 'HDFC0001234',
@@ -309,6 +310,14 @@ function createSchema() {
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
   `);
+
+  try {
+    db.run('ALTER TABLE settings ADD COLUMN logo_url TEXT');
+  } catch (e) {}
+
+  try {
+    db.run('ALTER TABLE companies ADD COLUMN logo_url TEXT');
+  } catch (e) {}
 }
 
 function seedInitialData() {

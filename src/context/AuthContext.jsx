@@ -55,6 +55,14 @@ export function AuthProvider({ children }) {
     localStorage.setItem('autoshield_active_company', JSON.stringify(company));
   };
 
+  const updateCurrentCompany = (updates) => {
+    setCurrentCompany(prev => {
+      const merged = { ...prev, ...updates };
+      localStorage.setItem('autoshield_active_company', JSON.stringify(merged));
+      return merged;
+    });
+  };
+
   const switchRole = (role) => {
     setCurrentRole(role);
     localStorage.setItem('autoshield_active_role', role);
@@ -81,6 +89,7 @@ export function AuthProvider({ children }) {
         isAdmin: currentRole === 'admin',
         isFrontOffice: currentRole === 'front_office',
         switchCompany,
+        updateCurrentCompany,
         switchRole,
         registerNewCompany,
         loadCompanies,

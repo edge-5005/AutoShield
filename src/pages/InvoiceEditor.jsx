@@ -16,8 +16,10 @@ import {
 import { api } from '../utils/api';
 import { formatCurrency } from '../utils/formatters';
 import QuickCustomerModal from '../components/QuickCustomerModal';
+import { useAuth } from '../context/AuthContext';
 
 export default function InvoiceEditor() {
+  const { currentCompany } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const jobId = searchParams.get('job_id');
@@ -251,13 +253,20 @@ export default function InvoiceEditor() {
         {/* Document Header Card */}
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-            <div>
-              <h1 className="text-xl font-black text-white">
-                Create {type === 'estimate' ? 'Quotation / Estimate' : 'GST Tax Invoice'}
-              </h1>
-              <p className="text-xs text-slate-400 mt-0.5">
-                {type === 'estimate' ? 'Prepare job estimate for customer approval' : 'Generate official SAC 9987 tax invoice'}
-              </p>
+            <div className="flex items-center gap-3.5">
+              {(settings?.logo_url || currentCompany?.logo_url) && (
+                <div className="w-12 h-12 rounded-xl bg-slate-950 border border-slate-700 p-1 flex items-center justify-center shrink-0">
+                  <img src={settings?.logo_url || currentCompany?.logo_url} alt="Logo" className="w-full h-full object-contain" />
+                </div>
+              )}
+              <div>
+                <h1 className="text-xl font-black text-white">
+                  Create {type === 'estimate' ? 'Quotation / Estimate' : 'GST Tax Invoice'}
+                </h1>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Billed under: <span className="text-amber-400 font-bold">{currentCompany?.name || settings?.studio_name || 'Studio'}</span> • {type === 'estimate' ? 'Prepare job estimate for customer approval' : 'Generate official SAC 9987 tax invoice'}
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-3 text-xs">

@@ -93,9 +93,9 @@ router.post('/register', (req, res) => {
     // Update settings table with the active company info
     db.run(`
       UPDATE settings
-      SET studio_name = ?, tagline = ?, phone = ?, email = ?, address = ?, gstin = ?, state_name = ?
+      SET studio_name = ?, tagline = ?, phone = ?, email = ?, address = ?, gstin = ?, state_name = ?, logo_url = ?
       WHERE id = 1
-    `, [name.trim(), tagline, phone, email, address, gstin.toUpperCase(), state_name]);
+    `, [name.trim(), tagline, phone, email, address, gstin.toUpperCase(), state_name, logo_url || '']);
 
     res.status(201).json({
       message: 'Company profile created successfully!',
@@ -133,11 +133,13 @@ router.post('/login', (req, res) => {
           id: company.id,
           name: company.name,
           slug: company.slug,
+          tagline: company.tagline,
           phone: company.phone,
           email: company.email,
           address: company.address,
           gstin: company.gstin,
-          bays_count: company.bays_count
+          bays_count: company.bays_count,
+          logo_url: company.logo_url
         }
       });
     } else if (role === 'front_office') {
@@ -153,11 +155,13 @@ router.post('/login', (req, res) => {
           id: company.id,
           name: company.name,
           slug: company.slug,
+          tagline: company.tagline,
           phone: company.phone,
           email: company.email,
           address: company.address,
           gstin: company.gstin,
-          bays_count: company.bays_count
+          bays_count: company.bays_count,
+          logo_url: company.logo_url
         }
       });
     } else {
@@ -193,9 +197,9 @@ router.put('/:id', (req, res) => {
     // Also update settings table if it's the active company
     db.run(`
       UPDATE settings
-      SET studio_name = ?, tagline = ?, phone = ?, email = ?, address = ?, gstin = ?, state_name = ?
+      SET studio_name = ?, tagline = ?, phone = ?, email = ?, address = ?, gstin = ?, state_name = ?, logo_url = ?
       WHERE id = 1
-    `, [name, tagline, phone, email, address, gstin, state_name]);
+    `, [name, tagline, phone, email, address, gstin, state_name, logo_url || '']);
 
     const updated = db.queryOne('SELECT * FROM companies WHERE id = ?', [id]);
     res.json({ message: 'Company profile updated successfully', company: updated });

@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
-import { X, Printer, Share2, ShieldCheck, Download, Award } from 'lucide-react';
+import { X, Printer, Share2, ShieldCheck, Download, Award, Building2 } from 'lucide-react';
 import { formatCurrency, formatDate } from '../utils/formatters';
+import { useAuth } from '../context/AuthContext';
 
 export default function InvoicePrintModal({ isOpen, onClose, invoice, onOpenWarranty, onOpenWhatsApp }) {
   if (!isOpen || !invoice) return null;
 
+  const { currentCompany } = useAuth();
   const { settings = {} } = invoice;
   const items = typeof invoice.items === 'string' ? JSON.parse(invoice.items) : (invoice.items || []);
+  const logo = settings.logo_url || currentCompany?.logo_url;
 
   const handlePrint = () => {
     window.print();
@@ -77,31 +80,47 @@ export default function InvoicePrintModal({ isOpen, onClose, invoice, onOpenWarr
         {/* Printable Invoice Sheet */}
         <div className="p-8 overflow-y-auto bg-white text-slate-900 text-xs printable-card font-sans">
           {/* Header */}
-          <div className="border-b-2 border-slate-900 pb-5 mb-5 flex justify-between items-start">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-extrabold text-xl tracking-tight text-blue-700">
-                  {settings.studio_name || 'Apex Auto Detailing Studio'}
-                </span>
-              </div>
-              <p className="text-slate-500 font-medium text-[11px] max-w-md">
-                {settings.tagline || 'Premium Paint Correction & Ceramic Studio'}
-              </p>
-              <p className="text-slate-600 text-[11px] mt-1 max-w-sm">
-                {settings.address}
-              </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-slate-600 text-[11px] mt-1">
-                <span><strong>Phone:</strong> {settings.phone}</span>
-                <span><strong>Email:</strong> {settings.email}</span>
-              </div>
-              {settings.gstin && (
-                <p className="text-slate-900 font-bold text-[11px] mt-1">
-                  GSTIN: {settings.gstin} | State Code: {settings.state_code || '29'} ({settings.state_name || 'Karnataka'})
-                </p>
+          <div className="border-b-2 border-slate-900 pb-5 mb-5 flex justify-between items-start gap-4">
+            <div className="flex items-start gap-4">
+              {logo ? (
+                <div className="w-16 h-16 rounded-xl border border-slate-200 bg-white p-1.5 shrink-0 flex items-center justify-center overflow-hidden shadow-sm">
+                  <img
+                    src={logo}
+                    alt={settings.studio_name || currentCompany?.name || 'Company Logo'}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="w-14 h-14 rounded-xl bg-slate-900 text-amber-400 p-2.5 shrink-0 flex items-center justify-center shadow-sm">
+                  <ShieldCheck className="w-9 h-9 text-amber-400" />
+                </div>
               )}
+
+              <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="font-extrabold text-xl tracking-tight text-slate-900">
+                    {settings.studio_name || currentCompany?.name || 'Apex Auto Detailing Studio'}
+                  </span>
+                </div>
+                <p className="text-slate-500 font-medium text-[11px] max-w-md">
+                  {settings.tagline || currentCompany?.tagline || 'Premium Paint Correction & Ceramic Studio'}
+                </p>
+                <p className="text-slate-600 text-[11px] mt-1 max-w-sm">
+                  {settings.address || currentCompany?.address}
+                </p>
+                <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-slate-600 text-[11px] mt-1">
+                  <span><strong>Phone:</strong> {settings.phone || currentCompany?.phone}</span>
+                  <span><strong>Email:</strong> {settings.email || currentCompany?.email}</span>
+                </div>
+                {(settings.gstin || currentCompany?.gstin) && (
+                  <p className="text-slate-900 font-bold text-[11px] mt-1">
+                    GSTIN: {settings.gstin || currentCompany?.gstin} | State: {settings.state_name || currentCompany?.state_name || 'Karnataka'}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div className="text-right">
+            <div className="text-right shrink-0">
               <span className="inline-block px-3 py-1 bg-slate-900 text-white font-black text-sm tracking-wider uppercase rounded mb-2">
                 {isEstimate ? 'ESTIMATE / QUOTE' : 'TAX INVOICE'}
               </span>
