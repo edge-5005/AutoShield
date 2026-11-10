@@ -1,0 +1,311 @@
+export const STATE_NAMES = {
+  'AN': 'Andaman & Nicobar Islands',
+  'AP': 'Andhra Pradesh',
+  'AR': 'Arunachal Pradesh',
+  'AS': 'Assam',
+  'BR': 'Bihar',
+  'CG': 'Chhattisgarh',
+  'CH': 'Chandigarh',
+  'DD': 'Daman & Diu',
+  'DL': 'Delhi',
+  'DN': 'Dadra & Nagar Haveli',
+  'GA': 'Goa',
+  'GJ': 'Gujarat',
+  'HP': 'Himachal Pradesh',
+  'HR': 'Haryana',
+  'JH': 'Jharkhand',
+  'JK': 'Jammu & Kashmir',
+  'KA': 'Karnataka',
+  'KL': 'Kerala',
+  'LA': 'Ladakh',
+  'LD': 'Lakshadweep',
+  'MH': 'Maharashtra',
+  'ML': 'Meghalaya',
+  'MN': 'Manipur',
+  'MP': 'Madhya Pradesh',
+  'MZ': 'Mizoram',
+  'NL': 'Nagaland',
+  'OD': 'Odisha',
+  'OR': 'Odisha',
+  'PB': 'Punjab',
+  'PY': 'Puducherry',
+  'RJ': 'Rajasthan',
+  'SK': 'Sikkim',
+  'TN': 'Tamil Nadu',
+  'TR': 'Tripura',
+  'TS': 'Telangana',
+  'UK': 'Uttarakhand',
+  'UA': 'Uttarakhand',
+  'UP': 'Uttar Pradesh',
+  'WB': 'West Bengal'
+};
+
+export const RTO_DIRECTORY = {
+  // Tamil Nadu
+  'TN01': { rto: 'Chennai Central (Ayanavaram)', state: 'Tamil Nadu' },
+  'TN02': { rto: 'Chennai North-West (Anna Nagar)', state: 'Tamil Nadu' },
+  'TN03': { rto: 'Chennai North-East (Tondiarpet)', state: 'Tamil Nadu' },
+  'TN04': { rto: 'Chennai East (Pulianthope)', state: 'Tamil Nadu' },
+  'TN05': { rto: 'Chennai North (Kolathur)', state: 'Tamil Nadu' },
+  'TN06': { rto: 'Chennai South-East (Mandavelli)', state: 'Tamil Nadu' },
+  'TN07': { rto: 'Chennai South (Thiruvanmiyur)', state: 'Tamil Nadu' },
+  'TN09': { rto: 'Chennai West (K.K. Nagar)', state: 'Tamil Nadu' },
+  'TN10': { rto: 'Chennai South-West (Virugambakkam)', state: 'Tamil Nadu' },
+  'TN11': { rto: 'Tambaram', state: 'Tamil Nadu' },
+  'TN12': { rto: 'Poonamallee', state: 'Tamil Nadu' },
+  'TN13': { rto: 'Ambattur', state: 'Tamil Nadu' },
+  'TN14': { rto: 'Sholinganallur', state: 'Tamil Nadu' },
+  'TN18': { rto: 'Red Hills', state: 'Tamil Nadu' },
+  'TN19': { rto: 'Chengalpattu', state: 'Tamil Nadu' },
+  'TN20': { rto: 'Tiruvallur', state: 'Tamil Nadu' },
+  'TN21': { rto: 'Kanchipuram', state: 'Tamil Nadu' },
+  'TN22': { rto: 'Meenambakkam', state: 'Tamil Nadu' },
+  'TN23': { rto: 'Vellore', state: 'Tamil Nadu' },
+  'TN24': { rto: 'Krishnagiri', state: 'Tamil Nadu' },
+  'TN25': { rto: 'Tiruvannamalai', state: 'Tamil Nadu' },
+  'TN28': { rto: 'Namakkal', state: 'Tamil Nadu' },
+  'TN29': { rto: 'Dharmapuri', state: 'Tamil Nadu' },
+  'TN30': { rto: 'Salem West', state: 'Tamil Nadu' },
+  'TN31': { rto: 'Cuddalore', state: 'Tamil Nadu' },
+  'TN32': { rto: 'Villupuram', state: 'Tamil Nadu' },
+  'TN33': { rto: 'Erode', state: 'Tamil Nadu' },
+  'TN34': { rto: 'Tiruchengode', state: 'Tamil Nadu' },
+  'TN36': { rto: 'Gobichettipalayam', state: 'Tamil Nadu' },
+  'TN37': { rto: 'Coimbatore South', state: 'Tamil Nadu' },
+  'TN38': { rto: 'Coimbatore North', state: 'Tamil Nadu' },
+  'TN39': { rto: 'Tirupur North', state: 'Tamil Nadu' },
+  'TN40': { rto: 'Mettupalayam', state: 'Tamil Nadu' },
+  'TN41': { rto: 'Pollachi', state: 'Tamil Nadu' },
+  'TN42': { rto: 'Tirupur South', state: 'Tamil Nadu' },
+  'TN43': { rto: 'Ooty (Nilgiris)', state: 'Tamil Nadu' },
+  'TN45': { rto: 'Tiruchirappalli (Trichy)', state: 'Tamil Nadu' },
+  'TN47': { rto: 'Karur', state: 'Tamil Nadu' },
+  'TN49': { rto: 'Thanjavur', state: 'Tamil Nadu' },
+  'TN54': { rto: 'Salem East', state: 'Tamil Nadu' },
+  'TN55': { rto: 'Pudukkottai', state: 'Tamil Nadu' },
+  'TN57': { rto: 'Dindigul', state: 'Tamil Nadu' },
+  'TN58': { rto: 'Madurai South', state: 'Tamil Nadu' },
+  'TN59': { rto: 'Madurai North', state: 'Tamil Nadu' },
+  'TN60': { rto: 'Theni', state: 'Tamil Nadu' },
+  'TN63': { rto: 'Sivagangai', state: 'Tamil Nadu' },
+  'TN64': { rto: 'Madurai Central', state: 'Tamil Nadu' },
+  'TN65': { rto: 'Ramanathapuram', state: 'Tamil Nadu' },
+  'TN66': { rto: 'Coimbatore Central (Mettupalayam Road)', state: 'Tamil Nadu' },
+  'TN67': { rto: 'Virudhunagar', state: 'Tamil Nadu' },
+  'TN68': { rto: 'Kumbakonam', state: 'Tamil Nadu' },
+  'TN69': { rto: 'Thoothukudi (Tuticorin)', state: 'Tamil Nadu' },
+  'TN70': { rto: 'Hosur', state: 'Tamil Nadu' },
+  'TN72': { rto: 'Tirunelveli', state: 'Tamil Nadu' },
+  'TN74': { rto: 'Nagercoil', state: 'Tamil Nadu' },
+  'TN75': { rto: 'Marthandam', state: 'Tamil Nadu' },
+  'TN76': { rto: 'Tenkasi', state: 'Tamil Nadu' },
+  'TN81': { rto: 'Tiruchirappalli East', state: 'Tamil Nadu' },
+  'TN82': { rto: 'Mayiladuthurai', state: 'Tamil Nadu' },
+  'TN85': { rto: 'Kundrathur', state: 'Tamil Nadu' },
+  'TN86': { rto: 'Erode West', state: 'Tamil Nadu' },
+  'TN87': { rto: 'Sriperumbudur', state: 'Tamil Nadu' },
+  'TN90': { rto: 'Salem South', state: 'Tamil Nadu' },
+  'TN99': { rto: 'Coimbatore West', state: 'Tamil Nadu' },
+
+  // Karnataka
+  'KA01': { rto: 'Bangalore Central (Koramangala)', state: 'Karnataka' },
+  'KA02': { rto: 'Bangalore West (Rajajinagar)', state: 'Karnataka' },
+  'KA03': { rto: 'Bangalore East (Indiranagar)', state: 'Karnataka' },
+  'KA04': { rto: 'Bangalore North (Yeshwantpur)', state: 'Karnataka' },
+  'KA05': { rto: 'Bangalore South (Jayanagar)', state: 'Karnataka' },
+  'KA50': { rto: 'Bangalore (Yelahanka)', state: 'Karnataka' },
+  'KA51': { rto: 'Bangalore (Electronics City)', state: 'Karnataka' },
+  'KA53': { rto: 'Bangalore (K.R. Puram)', state: 'Karnataka' },
+  'KA09': { rto: 'Mysore', state: 'Karnataka' },
+  'KA19': { rto: 'Mangalore', state: 'Karnataka' },
+  'KA22': { rto: 'Belgaum', state: 'Karnataka' },
+  'KA25': { rto: 'Dharwad / Hubli', state: 'Karnataka' },
+
+  // Maharashtra
+  'MH01': { rto: 'Mumbai South (Tardeo)', state: 'Maharashtra' },
+  'MH02': { rto: 'Mumbai West (Andheri)', state: 'Maharashtra' },
+  'MH03': { rto: 'Mumbai East (Wadala)', state: 'Maharashtra' },
+  'MH04': { rto: 'Thane', state: 'Maharashtra' },
+  'MH05': { rto: 'Kalyan', state: 'Maharashtra' },
+  'MH12': { rto: 'Pune', state: 'Maharashtra' },
+  'MH14': { rto: 'Pimpri-Chinchwad', state: 'Maharashtra' },
+  'MH43': { rto: 'Navi Mumbai (Vashi)', state: 'Maharashtra' },
+  'MH46': { rto: 'Navi Mumbai (Panvel)', state: 'Maharashtra' },
+  'MH47': { rto: 'Mumbai North (Borivali)', state: 'Maharashtra' },
+
+  // Delhi
+  'DL01': { rto: 'Delhi North (Mall Road)', state: 'Delhi' },
+  'DL02': { rto: 'Delhi New (Tilak Marg)', state: 'Delhi' },
+  'DL03': { rto: 'Delhi South (Sheikh Sarai)', state: 'Delhi' },
+  'DL04': { rto: 'Delhi West (Janakpuri)', state: 'Delhi' },
+  'DL05': { rto: 'Delhi North-East (Loni Road)', state: 'Delhi' },
+  'DL06': { rto: 'Delhi Central (Sarai Kale Khan)', state: 'Delhi' },
+  'DL07': { rto: 'Delhi East (Mayur Vihar)', state: 'Delhi' },
+  'DL08': { rto: 'Delhi North-West (Wazirpur)', state: 'Delhi' },
+  'DL09': { rto: 'Delhi South-West (Palam)', state: 'Delhi' },
+  'DL10': { rto: 'Delhi West (Raja Garden)', state: 'Delhi' },
+
+  // Telangana & Andhra Pradesh
+  'TS07': { rto: 'Hyderabad (Ranga Reddy)', state: 'Telangana' },
+  'TS08': { rto: 'Hyderabad (Medchal)', state: 'Telangana' },
+  'TS09': { rto: 'Hyderabad Central (Khairatabad)', state: 'Telangana' },
+  'TS10': { rto: 'Secunderabad', state: 'Telangana' },
+  'TS11': { rto: 'Hyderabad East (Malakpet)', state: 'Telangana' },
+  'AP39': { rto: 'Visakhapatnam', state: 'Andhra Pradesh' },
+  'AP16': { rto: 'Vijayawada', state: 'Andhra Pradesh' },
+
+  // Gujarat
+  'GJ01': { rto: 'Ahmedabad (Subhash Bridge)', state: 'Gujarat' },
+  'GJ05': { rto: 'Surat', state: 'Gujarat' },
+  'GJ06': { rto: 'Vadodara', state: 'Gujarat' },
+  'GJ27': { rto: 'Ahmedabad East (Vastral)', state: 'Gujarat' },
+
+  // Haryana & Punjab
+  'HR26': { rto: 'Gurgaon / Gurugram North', state: 'Haryana' },
+  'HR55': { rto: 'Gurgaon / Gurugram South', state: 'Haryana' },
+  'HR29': { rto: 'Faridabad', state: 'Haryana' },
+  'CH01': { rto: 'Chandigarh', state: 'Chandigarh' },
+  'PB08': { rto: 'Jalandhar', state: 'Punjab' },
+  'PB10': { rto: 'Ludhiana', state: 'Punjab' },
+
+  // Uttar Pradesh
+  'UP14': { rto: 'Ghaziabad', state: 'Uttar Pradesh' },
+  'UP16': { rto: 'Noida / Gautam Buddha Nagar', state: 'Uttar Pradesh' },
+  'UP32': { rto: 'Lucknow', state: 'Uttar Pradesh' },
+  'UP70': { rto: 'Prayagraj / Allahabad', state: 'Uttar Pradesh' },
+  'UP78': { rto: 'Kanpur', state: 'Uttar Pradesh' },
+
+  // Kerala
+  'KL01': { rto: 'Thiruvananthapuram', state: 'Kerala' },
+  'KL07': { rto: 'Ernakulam / Kochi', state: 'Kerala' },
+  'KL11': { rto: 'Kozhikode', state: 'Kerala' },
+  'KL14': { rto: 'Kasaragod', state: 'Kerala' }
+};
+
+export const POPULAR_CARS = [
+  // Toyota
+  { make: 'Toyota', model: 'Fortuner Legender', segment: 'SUV', paint_type: 'Metallic', colors: ['Super White', 'Attitude Black', 'Platinum White Pearl'] },
+  { make: 'Toyota', model: 'Fortuner', segment: 'SUV', paint_type: 'Metallic', colors: ['Attitude Black', 'Super White', 'Silver Metallic'] },
+  { make: 'Toyota', model: 'Innova Hycross', segment: 'SUV', paint_type: 'Metallic', colors: ['Blackish Ageha Glass Flake', 'Platinum White Pearl', 'Attitude Black'] },
+  { make: 'Toyota', model: 'Innova Crysta', segment: 'SUV', paint_type: 'Metallic', colors: ['Super White', 'Garnet Red', 'Silver'] },
+  { make: 'Toyota', model: 'Urban Cruiser Hyryder', segment: 'SUV', paint_type: 'Metallic', colors: ['Cafe White', 'Midnight Black', 'Cave Black'] },
+  { make: 'Toyota', model: 'Camry Hybrid', segment: 'Sedan', paint_type: 'Metallic', colors: ['Platinum White Pearl', 'Attitude Black', 'Burning Black'] },
+  { make: 'Toyota', model: 'Land Cruiser 300', segment: 'Luxury', paint_type: 'Metallic', colors: ['Precious White Pearl', 'Attitude Black'] },
+  { make: 'Toyota', model: 'Vellfire', segment: 'Luxury', paint_type: 'Metallic', colors: ['Black', 'Burning Black Crystal Shine', 'White Pearl'] },
+
+  // Hyundai
+  { make: 'Hyundai', model: 'Creta', segment: 'SUV', paint_type: 'Metallic', colors: ['Abyss Black', 'Atlas White', 'Titan Grey Matte', 'Ranger Khaki'] },
+  { make: 'Hyundai', model: 'Verna', segment: 'Sedan', paint_type: 'Metallic', colors: ['Abyss Black', 'Atlas White', 'Starry Night', 'Tellurian Brown'] },
+  { make: 'Hyundai', model: 'Tucson', segment: 'SUV', paint_type: 'Metallic', colors: ['Phantom Black', 'Polar White', 'Starry Night'] },
+  { make: 'Hyundai', model: 'Venue', segment: 'SUV', paint_type: 'Metallic', colors: ['Abyss Black', 'Atlas White', 'Titan Grey'] },
+  { make: 'Hyundai', model: 'Alcazar', segment: 'SUV', paint_type: 'Metallic', colors: ['Titan Grey', 'Abyss Black', 'Polar White'] },
+  { make: 'Hyundai', model: 'i20 N Line', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Thunder Blue', 'Atlas White', 'Abyss Black'] },
+  { make: 'Hyundai', model: 'i20', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Polar White', 'Starry Night', 'Titan Grey'] },
+  { make: 'Hyundai', model: 'Exter', segment: 'SUV', paint_type: 'Metallic', colors: ['Ranger Khaki', 'Atlas White', 'Starry Night'] },
+
+  // Mahindra
+  { make: 'Mahindra', model: 'Thar Roxx', segment: 'SUV', paint_type: 'Metallic', colors: ['Stealth Black', 'Deep Forest', 'Everest White'] },
+  { make: 'Mahindra', model: 'Thar', segment: 'SUV', paint_type: 'Metallic', colors: ['Napoli Black', 'Red Rage', 'Aquamarine', 'Galaxy Grey'] },
+  { make: 'Mahindra', model: 'XUV700', segment: 'SUV', paint_type: 'Metallic', colors: ['Midnight Black', 'Everest White', 'Dazzling Silver', 'Electric Blue'] },
+  { make: 'Mahindra', model: 'Scorpio-N', segment: 'SUV', paint_type: 'Metallic', colors: ['Napoli Black', 'Everest White', 'Deep Forest', 'Dazzling Silver'] },
+  { make: 'Mahindra', model: 'Scorpio Classic', segment: 'SUV', paint_type: 'Metallic', colors: ['Pearl White', 'Napoli Black'] },
+  { make: 'Mahindra', model: 'XUV 3XO', segment: 'SUV', paint_type: 'Metallic', colors: ['Citrine Yellow', 'Stealth Black', 'Everest White'] },
+  { make: 'Mahindra', model: 'Bolero Neo', segment: 'SUV', paint_type: 'Solid Gloss', colors: ['Diamond White', 'Napoli Black', 'Rocky Beige'] },
+
+  // Tata
+  { make: 'Tata', model: 'Harrier', segment: 'SUV', paint_type: 'Metallic', colors: ['Dark Edition (Oberon Black)', 'Sunlit Yellow', 'Pristine White'] },
+  { make: 'Tata', model: 'Safari', segment: 'SUV', paint_type: 'Metallic', colors: ['Dark Edition (Oberon Black)', 'Cosmic Gold', 'Stardust Ash'] },
+  { make: 'Tata', model: 'Nexon', segment: 'SUV', paint_type: 'Metallic', colors: ['Fearless Purple', 'Creative Ocean', 'Calgary White', 'Daytona Grey'] },
+  { make: 'Tata', model: 'Curvv', segment: 'SUV', paint_type: 'Metallic', colors: ['Gold Essence', 'Cosmic Dark', 'Pristine White'] },
+  { make: 'Tata', model: 'Punch', segment: 'SUV', paint_type: 'Metallic', colors: ['Tornado Blue', 'Daytona Grey', 'Calgary White'] },
+  { make: 'Tata', model: 'Altroz', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Downtown Red', 'Opera Blue', 'Avenue White'] },
+  { make: 'Tata', model: 'Tiago / Tigor', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Daytona Grey', 'Opal White', 'Midnight Plum'] },
+
+  // BMW
+  { make: 'BMW', model: '3 Series (330Li / 320d / M340i)', segment: 'Sedan', paint_type: 'Metallic', colors: ['Mineral White', 'Carbon Black', 'Portimao Blue', 'Dravit Grey'] },
+  { make: 'BMW', model: '5 Series (530d / 520d / 530i)', segment: 'Sedan', paint_type: 'Metallic', colors: ['Phytonic Blue', 'Black Sapphire', 'Mineral White'] },
+  { make: 'BMW', model: 'X1', segment: 'SUV', paint_type: 'Metallic', colors: ['Portimao Blue', 'Storm Bay Metallic', 'Alpine White'] },
+  { make: 'BMW', model: 'X3', segment: 'SUV', paint_type: 'Metallic', colors: ['Brooklyn Grey', 'Phytonic Blue', 'Black Sapphire'] },
+  { make: 'BMW', model: 'X5', segment: 'Luxury', paint_type: 'Metallic', colors: ['Carbon Black', 'Mineral White', 'Skyscraper Grey'] },
+  { make: 'BMW', model: 'X7', segment: 'Luxury', paint_type: 'Metallic', colors: ['Tanzanite Blue', 'Dravit Grey Metallic', 'Mineral White'] },
+
+  // Mercedes-Benz
+  { make: 'Mercedes-Benz', model: 'C-Class (C200 / C220d / C300)', segment: 'Sedan', paint_type: 'Metallic', colors: ['Obsidian Black', 'Selenite Grey', 'Polar White'] },
+  { make: 'Mercedes-Benz', model: 'E-Class (E200 / E220d / E350d)', segment: 'Sedan', paint_type: 'Metallic', colors: ['Obsidian Black', 'High-Tech Silver', 'Designo Hyacinth Red'] },
+  { make: 'Mercedes-Benz', model: 'GLC', segment: 'SUV', paint_type: 'Metallic', colors: ['Nautical Blue', 'Mojave Silver', 'Polar White'] },
+  { make: 'Mercedes-Benz', model: 'GLE', segment: 'Luxury', paint_type: 'Metallic', colors: ['Obsidian Black', 'Selenite Grey', 'Emerald Green'] },
+  { make: 'Mercedes-Benz', model: 'GLS', segment: 'Luxury', paint_type: 'Metallic', colors: ['Obsidian Black', 'Cavansite Blue', 'Designo Diamond White'] },
+  { make: 'Mercedes-Benz', model: 'G-Class (G63 AMG)', segment: 'Luxury', paint_type: 'Matte/Satin', colors: ['G manufaktur Night Black Magno', 'Designo Platinum Magno', 'Obsidian Black'] },
+
+  // Maruti Suzuki
+  { make: 'Maruti Suzuki', model: 'Swift', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Solid Fire Red', 'Pearl Arctic White', 'Luster Blue', 'Magma Grey'] },
+  { make: 'Maruti Suzuki', model: 'Baleno', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Nexa Blue', 'Pearl Arctic White', 'Grandeur Grey', 'Opulent Red'] },
+  { make: 'Maruti Suzuki', model: 'Brezza', segment: 'SUV', paint_type: 'Metallic', colors: ['Brave Khaki', 'Magma Grey', 'Pearl Arctic White', 'Splendid Silver'] },
+  { make: 'Maruti Suzuki', model: 'Grand Vitara', segment: 'SUV', paint_type: 'Metallic', colors: ['Nexa Blue', 'Arctic White', 'Grandeur Grey', 'Chestnut Brown'] },
+  { make: 'Maruti Suzuki', model: 'Fronx', segment: 'SUV', paint_type: 'Metallic', colors: ['Nexa Blue', 'Arctic White', 'Grandeur Grey', 'Earthen Brown'] },
+  { make: 'Maruti Suzuki', model: 'Jimny', segment: 'SUV', paint_type: 'Metallic', colors: ['Kinetic Yellow / Black', 'Bluish Black', 'Pearl Arctic White'] },
+  { make: 'Maruti Suzuki', model: 'Ertiga', segment: 'SUV', paint_type: 'Metallic', colors: ['Pearl Metallic Arctic White', 'Magma Grey', 'Splendid Silver'] },
+
+  // Kia
+  { make: 'Kia', model: 'Seltos', segment: 'SUV', paint_type: 'Metallic', colors: ['Pewter Olive', 'Imperial Blue', 'Aurora Black Pearl', 'Glacier White Pearl'] },
+  { make: 'Kia', model: 'Sonet', segment: 'SUV', paint_type: 'Metallic', colors: ['Pewter Olive', 'Aurora Black Pearl', 'Glacier White Pearl', 'Gravity Grey'] },
+  { make: 'Kia', model: 'Carens', segment: 'SUV', paint_type: 'Metallic', colors: ['Imperial Blue', 'Aurora Black Pearl', 'Glacier White Pearl'] },
+  { make: 'Kia', model: 'EV6', segment: 'Luxury', paint_type: 'Metallic', colors: ['Yacht Blue', 'Moonscape Matte', 'Aurora Black Pearl', 'Snow White Pearl'] },
+
+  // Volkswagen & Skoda
+  { make: 'Volkswagen', model: 'Virtus', segment: 'Sedan', paint_type: 'Metallic', colors: ['Wild Cherry Red', 'Curcuma Yellow', 'Candy White', 'Carbon Steel Grey'] },
+  { make: 'Volkswagen', model: 'Taigun', segment: 'SUV', paint_type: 'Metallic', colors: ['Wild Cherry Red', 'Curcuma Yellow', 'Candy White', 'Carbon Steel Grey'] },
+  { make: 'Skoda', model: 'Slavia', segment: 'Sedan', paint_type: 'Metallic', colors: ['Crystal Blue', 'Candy White', 'Carbon Steel', 'Tornado Red'] },
+  { make: 'Skoda', model: 'Kushaq', segment: 'SUV', paint_type: 'Metallic', colors: ['Honey Orange', 'Candy White', 'Carbon Steel', 'Tornado Red'] },
+  { make: 'Skoda', model: 'Kodiaq', segment: 'Luxury', paint_type: 'Metallic', colors: ['Lava Blue', 'Moon White', 'Graphite Grey', 'Magic Black'] },
+
+  // Audi
+  { make: 'Audi', model: 'A4', segment: 'Sedan', paint_type: 'Metallic', colors: ['Mythos Black', 'Ibis White', 'Navarra Blue', 'Manhattan Grey'] },
+  { make: 'Audi', model: 'A6', segment: 'Sedan', paint_type: 'Metallic', colors: ['Mythos Black', 'Glacier White', 'Firmament Blue', 'Vesuvius Grey'] },
+  { make: 'Audi', model: 'Q3', segment: 'SUV', paint_type: 'Metallic', colors: ['Glacier White', 'Mythos Black', 'Navarra Blue', 'Pulse Orange'] },
+  { make: 'Audi', model: 'Q5', segment: 'Luxury', paint_type: 'Metallic', colors: ['Mythos Black', 'Navarra Blue', 'District Green', 'Ibis White'] },
+  { make: 'Audi', model: 'Q7', segment: 'Luxury', paint_type: 'Metallic', colors: ['Mythos Black', 'Navarra Blue', 'Carrara White', 'Samurai Grey'] },
+
+  // MG (Morris Garages)
+  { make: 'MG', model: 'Hector', segment: 'SUV', paint_type: 'Metallic', colors: ['Havana Grey', 'Candy White', 'Starry Black', 'Aurora Silver'] },
+  { make: 'MG', model: 'ZS EV', segment: 'SUV', paint_type: 'Metallic', colors: ['Currant Red', 'Ferrite White', 'Starry Black'] },
+  { make: 'MG', model: 'Windsor EV', segment: 'SUV', paint_type: 'Metallic', colors: ['Turquoise Green', 'Pearl White', 'Starry Black', 'Clay Beige'] },
+
+  // Audi
+  { make: 'Audi', model: 'A4', segment: 'Sedan', paint_type: 'Metallic', colors: ['Mythos Black', 'Navarra Blue', 'Ibis White', 'Glacier White'] },
+  { make: 'Audi', model: 'A6', segment: 'Sedan', paint_type: 'Metallic', colors: ['Firmament Blue', 'Mythos Black', 'Vesuvius Grey'] },
+  { make: 'Audi', model: 'Q3', segment: 'SUV', paint_type: 'Metallic', colors: ['Navarra Blue', 'Pulse Orange', 'Glacier White'] },
+  { make: 'Audi', model: 'Q5', segment: 'SUV', paint_type: 'Metallic', colors: ['District Green', 'Mythos Black', 'Navarra Blue'] },
+  { make: 'Audi', model: 'Q7', segment: 'Luxury', paint_type: 'Metallic', colors: ['Samurai Grey', 'Navarra Blue', 'Carrara White'] },
+
+  // Land Rover & Porsche
+  { make: 'Land Rover', model: 'Defender 110 / 90', segment: 'Luxury', paint_type: 'Metallic', colors: ['Santorini Black', 'Carpathian Grey', 'Pangea Green'] },
+  { make: 'Land Rover', model: 'Range Rover Sport / Velar', segment: 'Luxury', paint_type: 'Metallic', colors: ['Santorini Black', 'Firenze Red', 'Hakuba Silver'] },
+  { make: 'Porsche', model: 'Cayenne', segment: 'Luxury', paint_type: 'Metallic', colors: ['Chromite Black Metallic', 'Carrara White', 'Algarve Blue'] },
+  { make: 'Porsche', model: 'Macan', segment: 'Luxury', paint_type: 'Metallic', colors: ['Gentian Blue Metallic', 'Papaya Metallic', 'Volcano Grey'] },
+
+  // Volkswagen & Skoda
+  { make: 'Volkswagen', model: 'Virtus', segment: 'Sedan', paint_type: 'Metallic', colors: ['Lava Blue', 'Wild Cherry Red', 'Carbon Steel Grey', 'Candy White'] },
+  { make: 'Volkswagen', model: 'Taigun', segment: 'SUV', paint_type: 'Metallic', colors: ['Curcuma Yellow', 'Wild Cherry Red', 'Carbon Steel Grey'] },
+  { make: 'Skoda', model: 'Slavia', segment: 'Sedan', paint_type: 'Metallic', colors: ['Crystal Blue', 'Tornado Red', 'Candy White', 'Carbon Steel'] },
+  { make: 'Skoda', model: 'Kushaq', segment: 'SUV', paint_type: 'Metallic', colors: ['Honey Orange', 'Tornado Red', 'Carbon Steel'] },
+
+  // Kia
+  { make: 'Kia', model: 'Seltos', segment: 'SUV', paint_type: 'Metallic', colors: ['Pewter Olive', 'Aurora Black Pearl', 'Glacier White Pearl', 'Imperial Blue'] },
+  { make: 'Kia', model: 'Sonet', segment: 'SUV', paint_type: 'Metallic', colors: ['Pewter Olive', 'Aurora Black Pearl', 'Intense Red'] },
+  { make: 'Kia', model: 'Carens', segment: 'SUV', paint_type: 'Metallic', colors: ['Imperial Blue', 'Aurora Black Pearl', 'Glacier White'] },
+
+  // Honda
+  { make: 'Honda', model: 'City', segment: 'Sedan', paint_type: 'Metallic', colors: ['Golden Brown Metallic', 'Platinum White Pearl', 'Meteoroid Grey'] },
+  { make: 'Honda', model: 'Elevate', segment: 'SUV', paint_type: 'Metallic', colors: ['Phoenix Orange Pearl', 'Obsidian Blue Pearl', 'Platinum White'] },
+
+  // Maruti Suzuki
+  { make: 'Maruti Suzuki', model: 'Grand Vitara', segment: 'SUV', paint_type: 'Metallic', colors: ['Nexa Blue', 'Arctic White', 'Grandeur Grey', 'Opulent Red'] },
+  { make: 'Maruti Suzuki', model: 'Brezza', segment: 'SUV', paint_type: 'Metallic', colors: ['Brave Khaki', 'Magma Grey', 'Pearl Arctic White'] },
+  { make: 'Maruti Suzuki', model: 'Swift', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Luster Blue', 'Novel Orange', 'Pearl Arctic White'] },
+  { make: 'Maruti Suzuki', model: 'Baleno', segment: 'Hatchback', paint_type: 'Metallic', colors: ['Nexa Blue', 'Opulent Red', 'Grandeur Grey'] },
+  { make: 'Maruti Suzuki', model: 'Fronx', segment: 'SUV', paint_type: 'Metallic', colors: ['Nexa Blue', 'Splendid Silver', 'Arctic White'] },
+  { make: 'Maruti Suzuki', model: 'Jimny', segment: 'SUV', paint_type: 'Solid Gloss', colors: ['Kinetic Yellow', 'Bluish Black', 'Sizzling Red'] },
+  { make: 'Maruti Suzuki', model: 'Dzire', segment: 'Sedan', paint_type: 'Metallic', colors: ['Arctic White', 'Magma Grey', 'Sherwood Brown'] },
+  { make: 'Maruti Suzuki', model: 'Ertiga', segment: 'SUV', paint_type: 'Metallic', colors: ['Magma Grey', 'Pearl Metallic Oxford Blue', 'Arctic White'] }
+];

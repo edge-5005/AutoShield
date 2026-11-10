@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-carbon-950 text-slate-100 font-sans antialiased;
+    background-image: 
+      radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(6, 182, 212, 0.04) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+/* Luxury Automotive Metallic Gradients */
+.gold-gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 font-extrabold;
+}
+
+.ceramic-badge {
+  @apply bg-amber-500/10 text-amber-300 border border-amber-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-bold shadow-sm;
+}
+
+.carbon-card {
+  @apply bg-carbon-900 border border-carbon-800 rounded-2xl shadow-carbon relative overflow-hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07080b;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2432;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .printable-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
