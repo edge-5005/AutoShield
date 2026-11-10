@@ -92,7 +92,13 @@ export async function initDb() {
   } catch (e) {
     // Column already exists
   }
+  try {
+    db.run("ALTER TABLE accessories ADD COLUMN image_url TEXT DEFAULT ''");
+  } catch (e) {
+    // Column already exists
+  }
   seedInitialData();
+  updateAccessoryImages();
   saveDb();
   return db;
 }
@@ -110,6 +116,24 @@ export function saveDb() {
 
 function createSchema() {
   db.run(`
+    CREATE TABLE IF NOT EXISTS companies (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      slug TEXT UNIQUE NOT NULL,
+      tagline TEXT,
+      phone TEXT,
+      email TEXT,
+      address TEXT,
+      gstin TEXT,
+      state_code TEXT DEFAULT '29',
+      state_name TEXT DEFAULT 'Karnataka',
+      bays_count INTEGER DEFAULT 4,
+      logo_url TEXT,
+      admin_pin TEXT DEFAULT '1234',
+      front_office_pin TEXT DEFAULT '0000',
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
     CREATE TABLE IF NOT EXISTS settings (
       id INTEGER PRIMARY KEY CHECK (id = 1),
       studio_name TEXT DEFAULT 'Apex Auto Detailing Studio',
@@ -288,6 +312,16 @@ function createSchema() {
 }
 
 function seedInitialData() {
+  // Check companies
+  const checkCompanies = db.exec("SELECT COUNT(*) as count FROM companies");
+  const companiesCount = checkCompanies[0]?.values[0]?.[0] || 0;
+  if (companiesCount === 0) {
+    db.run(`
+      INSERT INTO companies (id, name, slug, tagline, phone, email, address, gstin, state_code, state_name, bays_count, admin_pin, front_office_pin)
+      VALUES (1, 'Apex Auto Detailing Studio', 'apex-auto', 'Premium Paint Correction, Ceramic Coating & Self-Healing PPF', '+91 98765 43210', 'info@apexautodetailing.in', 'Plot 108, Outer Ring Road, Near Marathahalli, Bangalore, Karnataka - 560037', '29AABCA1234D1Z5', '29', 'Karnataka', 4, '1234', '0000');
+    `);
+  }
+
   // Check settings
   const checkSettings = db.exec("SELECT COUNT(*) as count FROM settings");
   const settingsCount = checkSettings[0]?.values[0]?.[0] || 0;
@@ -527,6 +561,29 @@ function seedInitialData() {
       ('Meta Sponsored Ads & Google Search Ads Spend', 'Ad Campaigns & Social Media Marketing', 28100, '2026-11-08', 'Credit Card', 'Meta Ads & Google Ads India', 'META-ADS-BILL-102', 'Paid ad spend across Instagram and Google Search detailing campaigns.'),
       ('Rupes BigFoot Polisher Servicing & Foam Pad Replacements', 'Equipment & Polisher Maintenance', 6200, '2026-11-06', 'UPI', 'Car Care Tools & Equipments Bangalore', 'RCP-PADS-004', 'Pack of 12 wool pads, finishing foam pads, and grease overhaul.');
     `);
+  }
+}
+
+function updateAccessoryImages() {
+  const images = {
+    '7D Custom Diamond-Stitch Floor Mats': 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=80',
+    '4K Dual-Channel Dashcam with Hardwired Parking Mode': 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=800&q=80',
+    'Graphene Hydrophobic Top-Up Detailer (500ml)': 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80',
+    '1200 GSM Twisted Loop Microfiber Car Drying Towel (60x90cm)': 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=800&q=80',
+    'German Leather Rejuvenation & Balm Conditioner Kit': 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80',
+    'Solar Alloy Rotary Car Perfume & Aromatherapy Diffuser': 'https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=800&q=80',
+    'Self-Healing TPU Door Edge & Cup Guard Kit (8 Pcs)': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80',
+    'Custom Magnetic Snap-On Window Sunshades (Set of 4)': 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80',
+    '15W MagSafe Auto-Clamping Fast Wireless Car Charger': 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80',
+    'Carbon Fiber Protective Key Fob Shell Case': 'https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=800&q=80'
+  };
+
+  for (const [name, url] of Object.entries(images)) {
+    try {
+      db.run('UPDATE accessories SET image_url = ? WHERE name = ? AND (image_url IS NULL OR image_url = "" OR image_url = "null")', [url, name]);
+    } catch (e) {
+      // ignore
+    }
   }
 }
 

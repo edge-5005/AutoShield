@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import CompanyRegisterModal from './components/CompanyRegisterModal';
+import RoleLoginModal from './components/RoleLoginModal';
 
 import Dashboard from './pages/Dashboard';
 import JobCards from './pages/JobCards';
@@ -18,7 +20,7 @@ import Accessories from './pages/Accessories';
 import AccountsProfitLoss from './pages/AccountsProfitLoss';
 import LandingPage from './pages/LandingPage';
 
-import { api } from './utils/api';
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -53,7 +55,9 @@ class ErrorBoundary extends React.Component {
 }
 
 // Studio CRM Internal Layout
-function StudioLayout({ studioName }) {
+function StudioLayout() {
+  const { currentCompany } = useAuth();
+
   return (
     <div className="flex h-screen overflow-hidden bg-carbon-950 font-sans">
       {/* Navigation Sidebar */}
@@ -61,59 +65,55 @@ function StudioLayout({ studioName }) {
 
       {/* Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <Navbar studioName={studioName} />
+        <Navbar />
 
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </div>
+
+      {/* Modals */}
+      <CompanyRegisterModal />
+      <RoleLoginModal />
     </div>
   );
 }
 
 export default function App() {
-  const [studioName, setStudioName] = useState('Apex Auto Detailing Studio');
-
-  useEffect(() => {
-    api.getSettings().then(sett => {
-      if (sett && sett.studio_name) {
-        setStudioName(sett.studio_name);
-      }
-    }).catch(() => {});
-  }, []);
-
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Routes>
-          {/* Public Animated Landing Page */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/landing" element={<LandingPage />} />
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Animated Landing Page */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/landing" element={<LandingPage />} />
 
-          {/* Studio Operations & CRM Dashboard */}
-          <Route path="/dashboard" element={<StudioLayout studioName={studioName} />}>
-            <Route index element={<Dashboard />} />
-          </Route>
+            {/* Studio Operations & CRM Dashboard */}
+            <Route path="/dashboard" element={<StudioLayout />}>
+              <Route index element={<Dashboard />} />
+            </Route>
 
-          <Route element={<StudioLayout studioName={studioName} />}>
-            <Route path="/jobs" element={<JobCards />} />
-            <Route path="/jobs/:id" element={<JobCardDetail />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/customers/:id" element={<CustomerDetail />} />
-            <Route path="/billing" element={<Billing />} />
-            <Route path="/billing/new" element={<InvoiceEditor />} />
-            <Route path="/services" element={<ServiceCatalog />} />
-            <Route path="/accessories" element={<Accessories />} />
-            <Route path="/ads" element={<AdCampaigns />} />
-            <Route path="/accounts" element={<AccountsProfitLoss />} />
-            <Route path="/reminders" element={<Reminders />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
+            <Route element={<StudioLayout />}>
+              <Route path="/jobs" element={<JobCards />} />
+              <Route path="/jobs/:id" element={<JobCardDetail />} />
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/customers/:id" element={<CustomerDetail />} />
+              <Route path="/billing" element={<Billing />} />
+              <Route path="/billing/new" element={<InvoiceEditor />} />
+              <Route path="/services" element={<ServiceCatalog />} />
+              <Route path="/accessories" element={<Accessories />} />
+              <Route path="/ads" element={<AdCampaigns />} />
+              <Route path="/accounts" element={<AccountsProfitLoss />} />
+              <Route path="/reminders" element={<Reminders />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
 
-          {/* Fallback to Landing Page */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
+            {/* Fallback to Landing Page */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

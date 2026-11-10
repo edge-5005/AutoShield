@@ -16,6 +16,7 @@ import settingsRoutes from './routes/settings.js';
 import accessoryRoutes from './routes/accessories.js';
 import adRoutes from './routes/ads.js';
 import accountRoutes from './routes/accounts.js';
+import companyRoutes from './routes/companies.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,6 +49,7 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/accessories', accessoryRoutes);
 app.use('/api/ads', adRoutes);
 app.use('/api/accounts', accountRoutes);
+app.use('/api/companies', companyRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

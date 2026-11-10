@@ -95,4 +95,11 @@ export const api = {
   createExpense: (data) => request('/accounts/expenses', { method: 'POST', body: data }),
   updateExpense: (id, data) => request(`/accounts/expenses/${id}`, { method: 'PUT', body: data }),
   deleteExpense: (id) => request(`/accounts/expenses/${id}`, { method: 'DELETE' }),
+
+  // Companies & Multi-Tenant Commercial Profile
+  getCompanies: () => request('/companies'),
+  getCompany: (id) => request(`/companies/${id}`),
+  registerCompany: (data) => request('/companies/register', { method: 'POST', body: data }),
+  loginCompany: (data) => request('/companies/login', { method: 'POST', body: data }),
+  updateCompany: (id, data) => request(`/companies/${id}`, { method: 'PUT', body: data }),
 };

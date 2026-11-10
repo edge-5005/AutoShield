@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { 
   Wrench, 
   Users, 
@@ -14,18 +14,30 @@ import {
   ChevronRight,
   ShieldCheck,
   TrendingUp,
-  CreditCard
+  CreditCard,
+  Building2,
+  Lock,
+  Plus
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { formatCurrency, formatDate, getStatusBadge } from '../utils/formatters';
+import { useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  const { currentCompany, currentRole, isAdmin, setIsRegisterModalOpen, setIsRoleModalOpen } = useAuth();
+
+  useEffect(() => {
+    if (searchParams.get('register') === 'true') {
+      setIsRegisterModalOpen(true);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     loadDashboard();
-  }, []);
+  }, [currentCompany]);
 
   const loadDashboard = async () => {
     try {
@@ -50,36 +62,54 @@ export default function Dashboard() {
   const { metrics, jobsByStatus, upcomingReminders, recentJobs, recentInvoices } = data;
 
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto">
-      {/* Welcome Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-900/40 via-slate-900 to-slate-900 p-6 rounded-2xl border border-blue-500/20 shadow-xl">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-400 border border-blue-500/30">
-              Studio Operations
+    <div className="p-6 sm:p-8 space-y-8 max-w-7xl mx-auto">
+      {/* Welcome Banner with Company Identity & Role Badge */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-carbon-900 border border-carbon-800 p-6 rounded-3xl shadow-carbon relative overflow-hidden">
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30">
+              {currentCompany?.name || 'Apex Auto Studio'}
             </span>
-            <span className="text-xs text-slate-400">• Today</span>
+            <button
+              onClick={() => setIsRoleModalOpen(true)}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-all ${
+                isAdmin
+                  ? 'bg-amber-500/15 text-amber-300 border-amber-500/30'
+                  : 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
+              }`}
+            >
+              <span>{isAdmin ? '👑 Studio Owner / Admin' : '🖥️ Front Office Reception'}</span>
+              <span className="text-[9px] text-slate-400 font-mono">(Switch)</span>
+            </button>
+            <span className="text-xs text-slate-500">• {currentCompany?.bays_count || 4} Detailing Bays</span>
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">Detailing Studio Command Center</h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Manage live bay assignments, customer vehicles, ceramic/PPF warranties, and GST billing.
+
+          <h1 className="text-2xl font-black text-white tracking-tight">
+            Detailing Command Center
+          </h1>
+          <p className="text-xs text-slate-400 max-w-xl">
+            {isAdmin 
+              ? 'Complete studio command view: active ceramic/PPF bay queues, receivables, and profit analytics.'
+              : 'Front office bay operations: customer vehicle check-in, job cards, 360° inspection, and invoice generation.'}
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <button
+            onClick={() => setIsRegisterModalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-800 hover:bg-carbon-750 text-slate-200 border border-carbon-700 text-xs font-bold transition-all shadow-sm"
+          >
+            <Plus className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline">Register New Company</span>
+            <span className="sm:hidden">Company</span>
+          </button>
+
           <Link
             to="/jobs?create=true"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 text-xs font-black shadow-ceramic transition-all transform active:scale-95"
           >
-            <Wrench className="w-4 h-4" />
-            <span>Create Job Card</span>
-          </Link>
-          <Link
-            to="/billing/new"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold border border-slate-700 transition-all"
-          >
-            <Receipt className="w-4 h-4" />
-            <span>New Invoice</span>
+            <Wrench className="w-3.5 h-3.5 text-carbon-950" />
+            <span>New Job Card</span>
           </Link>
         </div>
       </div>

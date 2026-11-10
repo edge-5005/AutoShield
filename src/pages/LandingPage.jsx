@@ -46,6 +46,13 @@ export default function LandingPage() {
 
           <div className="flex items-center gap-3">
             <Link
+              to="/dashboard?register=true"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-850 hover:bg-carbon-800 text-amber-300 border border-amber-500/30 text-xs font-bold transition-all"
+            >
+              <span>+ Create Company Profile</span>
+            </Link>
+
+            <Link
               to="/dashboard"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 font-black text-xs shadow-ceramic transition-all transform active:scale-95"
             >
@@ -78,20 +85,20 @@ export default function LandingPage() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link
-            to="/dashboard"
+            to="/dashboard?register=true"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 font-black text-sm shadow-ceramic hover:shadow-amber-500/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <Zap className="w-4 h-4 text-carbon-950 fill-carbon-950" />
-            <span>Launch Studio Management App</span>
+            <span>Create Studio Company Profile →</span>
           </Link>
 
-          <a
-            href="#demo"
+          <Link
+            to="/dashboard"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-carbon-900 hover:bg-carbon-850 text-slate-200 border border-carbon-700 text-sm font-bold shadow-carbon transition-all"
           >
             <Play className="w-4 h-4 text-amber-400 fill-amber-400" />
-            <span>Experience Interactive 50/50 Demo</span>
-          </a>
+            <span>Launch Studio Dashboard (Live Demo)</span>
+          </Link>
         </div>
 
         {/* Trust Badges */}
