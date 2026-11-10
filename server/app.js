@@ -60,6 +60,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Serve static assets from public folder (accessories, images, etc.)
+const publicPath = path.join(__dirname, '..', 'public');
+if (fs.existsSync(publicPath)) {
+  app.use(express.static(publicPath));
+}
+
 // Serve frontend in local standalone production server
 const distPath = path.join(__dirname, '..', 'dist');
 if (fs.existsSync(distPath)) {

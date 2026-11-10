@@ -27,7 +27,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 12,
     warranty_months: 24,
     description: 'Dual-layer wire coil + waterproof diamond leatherette tailored specifically to vehicle cabin contour.',
-    image_url: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/7d-mats.jpg'
   },
   {
     name: '4K Dual-Channel Dashcam with Hardwired Parking Mode',
@@ -38,7 +38,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 8,
     warranty_months: 12,
     description: 'Front 4K + Rear 1080p, Sony Starvis night vision, supercapacitor, 24-hr G-sensor parking recording.',
-    image_url: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/4k-dashcam.jpg'
   },
   {
     name: 'Graphene Hydrophobic Top-Up Detailer (500ml)',
@@ -49,7 +49,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 35,
     warranty_months: 24,
     description: 'Spray-on ceramic booster that revives contact angle, gloss, and hydrophobic water-beading on coated surfaces.',
-    image_url: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/graphene-spray.jpg'
   },
   {
     name: '1200 GSM Twisted Loop Microfiber Car Drying Towel',
@@ -60,7 +60,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 45,
     warranty_months: 6,
     description: 'Scratch-free edgeless super absorbent towel capable of drying an entire full-size SUV in a single pass.',
-    image_url: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/microfiber-towel.jpg'
   },
   {
     name: 'German Leather Rejuvenation & Balm Conditioner Kit',
@@ -71,7 +71,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 16,
     warranty_months: 12,
     description: 'pH-neutral foaming leather shampoo, restorative lanolin balm conditioner, and horsehair cleaning brush.',
-    image_url: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/leather-kit.jpg'
   },
   {
     name: 'Solar Alloy Rotary Car Perfume & Aromatherapy Diffuser',
@@ -82,7 +82,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 22,
     warranty_months: 6,
     description: 'Machined aircraft-grade aluminum alloy with solar-powered turbine bearing and organic essential scent ring.',
-    image_url: 'https://images.unsplash.com/photo-1588854337236-6889d631faa8?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/solar-diffuser.jpg'
   },
   {
     name: 'Self-Healing TPU Door Edge & Cup Guard Kit (8 Pcs)',
@@ -93,7 +93,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 20,
     warranty_months: 36,
     description: 'Pre-cut 200-micron optical TPU protection film to prevent ring scratches in door cups and wall chips.',
-    image_url: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/tpu-door-guards.jpg'
   },
   {
     name: 'Custom Magnetic Snap-On Window Sunshades (Set of 4)',
@@ -104,7 +104,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 14,
     warranty_months: 12,
     description: 'High-density laser-measured heat and UV blocking mesh curtains with magnetic window frame snaps.',
-    image_url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/magnetic-sunshades.jpg'
   },
   {
     name: '15W MagSafe Auto-Clamping Fast Wireless Car Charger',
@@ -115,7 +115,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 18,
     warranty_months: 12,
     description: 'Smart infrared motorized grip, Qi fast-charging certification, and anti-vibration air vent hook.',
-    image_url: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/magsafe-charger.jpg'
   },
   {
     name: 'Carbon Fiber Protective Key Fob Shell Case',
@@ -126,7 +126,7 @@ const PRESET_ACCESSORIES = [
     stock_quantity: 28,
     warranty_months: 12,
     description: 'Real twill weave look lightweight ABS shell protecting key remote from accidental drops and scuffs.',
-    image_url: 'https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=800&q=80'
+    image_url: '/accessories/carbon-keyfob.jpg'
   }
 ];
 
