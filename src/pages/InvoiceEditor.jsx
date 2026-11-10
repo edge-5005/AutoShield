@@ -23,10 +23,12 @@ export default function InvoiceEditor() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const jobId = searchParams.get('job_id');
+  const accessoryId = searchParams.get('accessory_id');
 
   const [customers, setCustomers] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [services, setServices] = useState([]);
+  const [accessories, setAccessories] = useState([]);
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
   const [isQuickCustomerOpen, setIsQuickCustomerOpen] = useState(false);
@@ -49,23 +51,42 @@ export default function InvoiceEditor() {
 
   useEffect(() => {
     loadInitialData();
-  }, [jobId]);
+  }, [jobId, accessoryId]);
 
   const loadInitialData = async () => {
     try {
       setLoading(true);
-      const [cList, vList, sList, sett] = await Promise.all([
+      const [cList, vList, sList, sett, accList] = await Promise.all([
         api.getCustomers(),
         api.getVehicles(),
         api.getServices(),
-        api.getSettings()
+        api.getSettings(),
+        api.getAccessories()
       ]);
 
-      setCustomers(cList);
-      setVehicles(vList);
-      setServices(sList);
-      setSettings(sett);
-      setTerms(sett.terms_conditions || '');
+      setCustomers(cList || []);
+      setVehicles(vList || []);
+      setServices(sList || []);
+      setSettings(sett || {});
+      setAccessories(accList || []);
+      setTerms(sett?.terms_conditions || '');
+
+      // If accessory_id is passed, pre-populate accessory item
+      if (accessoryId && accList && accList.length > 0) {
+        const acc = accList.find(a => String(a.id) === String(accessoryId));
+        if (acc) {
+          setItems([
+            {
+              description: `${acc.name} (${acc.brand || 'OEM'})`,
+              sac: acc.hsn_sac_code || '8708',
+              qty: 1,
+              rate: Number(acc.selling_price) || 0,
+              taxRate: Number(acc.tax_rate) || 18,
+              warranty_months: Number(acc.warranty_months) || 0
+            }
+          ]);
+        }
+      }
 
       // If job_id is passed, preload from Job Card
       if (jobId) {
@@ -139,6 +160,24 @@ export default function InvoiceEditor() {
         rate: Number(price) || 0,
         taxRate: srv.tax_rate || 18,
         warranty_months: srv.warranty_months || 0
+      }
+    ]);
+  };
+
+  // Add accessory / merchandise item
+  const addAccessoryItem = (accId) => {
+    const acc = accessories.find(a => String(a.id) === String(accId));
+    if (!acc) return;
+
+    setItems([
+      ...items.filter(i => i.description.trim() !== '' || i.rate > 0),
+      {
+        description: `${acc.name} (${acc.brand || 'OEM'})`,
+        sac: acc.hsn_sac_code || '8708',
+        qty: 1,
+        rate: Number(acc.selling_price) || 0,
+        taxRate: Number(acc.tax_rate) || 18,
+        warranty_months: Number(acc.warranty_months) || 0
       }
     ]);
   };
@@ -364,8 +403,8 @@ export default function InvoiceEditor() {
               <span>Detailing Services & Products</span>
             </h2>
 
-            {/* Quick Add From Service Catalog */}
-            <div className="flex items-center gap-2">
+            {/* Quick Add From Service Catalog & Accessories */}
+            <div className="flex flex-wrap items-center gap-2">
               <select
                 onChange={(e) => {
                   if (e.target.value) {
@@ -373,12 +412,29 @@ export default function InvoiceEditor() {
                     e.target.value = '';
                   }
                 }}
-                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
+                className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500"
               >
-                <option value="">+ Add Package from Menu...</option>
+                <option value="">+ Add Service Package...</option>
                 {services.map(s => (
                   <option key={s.id} value={s.id}>
                     {s.name} ({s.category})
+                  </option>
+                ))}
+              </select>
+
+              <select
+                onChange={(e) => {
+                  if (e.target.value) {
+                    addAccessoryItem(e.target.value);
+                    e.target.value = '';
+                  }
+                }}
+                className="bg-slate-950 border border-amber-500/40 text-amber-300 rounded-xl px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-amber-400"
+              >
+                <option value="">📦 + Add Car Accessory...</option>
+                {accessories.map(a => (
+                  <option key={a.id} value={a.id} disabled={a.stock_quantity <= 0}>
+                    {a.name} — ₹{a.selling_price} {a.stock_quantity <= 0 ? '(Out of Stock)' : `(${a.stock_quantity} in stock)`}
                   </option>
                 ))}
               </select>

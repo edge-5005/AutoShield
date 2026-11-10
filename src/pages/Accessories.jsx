@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Package, Plus, Search, Edit3, Trash2, RefreshCw, 
   ShieldCheck, AlertTriangle, CheckCircle, ArrowUpDown, Tag, Box,
-  Image as ImageIcon, Sparkles, ExternalLink
+  Image as ImageIcon, Sparkles, ExternalLink, Receipt
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { formatCurrency } from '../utils/formatters';
@@ -496,12 +497,21 @@ export default function Accessories() {
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-[11px] text-slate-400">
-                      Alert threshold: <strong>{item.min_stock_alert} units</strong>
+                  <div className="pt-2 border-t border-carbon-800/80 flex items-center justify-between gap-2">
+                    <span className="text-[10px] text-slate-400">
+                      Alert: <strong>{item.min_stock_alert} units</strong>
                     </span>
 
                     <div className="flex items-center gap-1.5">
+                      <Link
+                        to={`/billing/new?accessory_id=${item.id}`}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 text-[11px] font-black transition-all"
+                        title="Add this accessory directly to a new customer invoice"
+                      >
+                        <Receipt className="w-3 h-3 text-amber-400" />
+                        <span>Bill Item</span>
+                      </Link>
+
                       <button
                         onClick={() => handleOpenEdit(item)}
                         className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-carbon-800 transition-colors"
