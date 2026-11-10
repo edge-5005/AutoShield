@@ -269,7 +269,7 @@ export default function Accessories() {
   const totalStockValue = accessories.reduce((acc, a) => acc + ((a.cost_price || 0) * (a.stock_quantity || 0)), 0);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-5 sm:space-y-6">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

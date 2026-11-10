@@ -4,7 +4,7 @@ import {
   ShieldCheck, Sparkles, Wrench, Receipt, Users, Megaphone, 
   Package, PieChart, ArrowRight, CheckCircle2, Star, Zap, 
   CarFront, Layers, Award, Droplets, Sun, ChevronRight, Play,
-  TrendingUp, Clock, Check
+  TrendingUp, Clock, Check, Menu, X
 } from 'lucide-react';
 import AutoShieldLogo from '../components/AutoShieldLogo';
 import { formatCurrency } from '../utils/formatters';
@@ -13,6 +13,7 @@ export default function LandingPage() {
   const [sliderPos, setSliderPos] = useState(50);
   const [activeDemoTab, setActiveDemoTab] = useState('ceramic'); // 'ceramic' | 'ppf' | 'interior'
   const [carsPerMonth, setCarsPerMonth] = useState(25);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Estimated ROI calculation
   const avgTicketSize = 18000;
@@ -30,10 +31,10 @@ export default function LandingPage() {
       </div>
 
       {/* Floating Glassmorphic Top Navbar */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-carbon-950/80 border-b border-carbon-800/80 px-6 py-3.5 transition-all">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-carbon-950/90 border-b border-carbon-800/80 px-4 sm:px-6 py-3 transition-all pt-safe">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/" className="hover:opacity-95 transition-opacity">
-            <AutoShieldLogo size={38} />
+          <Link to="/" className="hover:opacity-95 transition-opacity flex items-center">
+            <AutoShieldLogo size={34} />
           </Link>
 
           <nav className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-300">
@@ -44,23 +45,78 @@ export default function LandingPage() {
             <a href="#warranty" className="hover:text-amber-400 transition-colors">Warranty Cards</a>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/dashboard?register=true"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-850 hover:bg-carbon-800 text-amber-300 border border-amber-500/30 text-xs font-bold transition-all"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-850 hover:bg-carbon-800 text-amber-300 border border-amber-500/30 text-xs font-bold transition-all"
             >
               <span>+ Create Company Profile</span>
             </Link>
 
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 font-black text-xs shadow-ceramic transition-all transform active:scale-95"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 font-black text-xs shadow-ceramic transition-all transform active:scale-95 touch-press"
             >
               <span>Enter Studio CRM</span>
               <ArrowRight className="w-3.5 h-3.5 text-carbon-950" />
             </Link>
+
+            {/* Mobile Hamburger Menu Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-xl bg-carbon-900 border border-carbon-800 text-slate-300 hover:text-white active:bg-carbon-800 touch-press"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5 text-amber-400" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Collapsible Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-3 pt-3 border-t border-carbon-800/80 space-y-3 pb-3 animate-fade-in">
+            <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+              <a 
+                href="#features" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-carbon-900/60 border border-carbon-800 text-slate-300 hover:text-amber-400"
+              >
+                Core Features
+              </a>
+              <a 
+                href="#demo" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-carbon-900/60 border border-carbon-800 text-slate-300 hover:text-amber-400"
+              >
+                50/50 Studio Demo
+              </a>
+              <a 
+                href="#modules" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-carbon-900/60 border border-carbon-800 text-slate-300 hover:text-amber-400"
+              >
+                Software Modules
+              </a>
+              <a 
+                href="#roi" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-xl bg-carbon-900/60 border border-carbon-800 text-slate-300 hover:text-amber-400"
+              >
+                ROI Calculator
+              </a>
+            </div>
+
+            <div className="pt-2">
+              <Link
+                to="/dashboard?register=true"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 p-2.5 rounded-xl bg-carbon-900 border border-amber-500/40 text-amber-300 text-xs font-bold"
+              >
+                <span>+ Create Your Company Profile</span>
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* HERO SECTION */}
@@ -209,7 +265,9 @@ export default function LandingPage() {
               max="90"
               value={sliderPos}
               onChange={(e) => setSliderPos(Number(e.target.value))}
+              style={{ touchAction: 'pan-y' }}
               className="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-30"
+              aria-label="Paint correction comparison slider"
             />
           </div>
 

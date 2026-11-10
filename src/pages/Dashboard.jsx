@@ -62,29 +62,29 @@ export default function Dashboard() {
   const { metrics, jobsByStatus, upcomingReminders, recentJobs, recentInvoices } = data;
 
   return (
-    <div className="p-6 sm:p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-3.5 sm:p-6 lg:p-8 space-y-5 sm:space-y-8 max-w-7xl mx-auto">
       {/* Welcome Banner with Company Identity & Role Badge */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-carbon-900 border border-carbon-800 p-6 rounded-3xl shadow-carbon relative overflow-hidden">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-carbon-900 border border-carbon-800 p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-carbon relative overflow-hidden">
         <div className="space-y-1.5">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30">
               {currentCompany?.name || 'Apex Auto Studio'}
             </span>
             <button
               onClick={() => setIsRoleModalOpen(true)}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-all ${
+              className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-all touch-press ${
                 isAdmin
                   ? 'bg-amber-500/15 text-amber-300 border-amber-500/30'
                   : 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
               }`}
             >
-              <span>{isAdmin ? '👑 Studio Owner / Admin' : '🖥️ Front Office Reception'}</span>
-              <span className="text-[9px] text-slate-400 font-mono">(Switch)</span>
+              <span>{isAdmin ? '👑 Studio Owner' : '🖥️ Front Office'}</span>
+              <span className="text-[9px] text-slate-400 font-mono hidden sm:inline">(Switch)</span>
             </button>
-            <span className="text-xs text-slate-500">• {currentCompany?.bays_count || 4} Detailing Bays</span>
+            <span className="text-[11px] sm:text-xs text-slate-500">• {currentCompany?.bays_count || 4} Bays</span>
           </div>
 
-          <h1 className="text-2xl font-black text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Detailing Command Center
           </h1>
           <p className="text-xs text-slate-400 max-w-xl">
@@ -94,10 +94,10 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setIsRegisterModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-800 hover:bg-carbon-750 text-slate-200 border border-carbon-700 text-xs font-bold transition-all shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-carbon-800 hover:bg-carbon-750 text-slate-200 border border-carbon-700 text-xs font-bold transition-all shadow-sm touch-press"
           >
             <Plus className="w-3.5 h-3.5 text-amber-400" />
             <span className="hidden sm:inline">Register New Company</span>
@@ -106,7 +106,7 @@ export default function Dashboard() {
 
           <Link
             to="/jobs?create=true"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 text-xs font-black shadow-ceramic transition-all transform active:scale-95"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-carbon-950 text-xs font-black shadow-ceramic transition-all transform active:scale-95 touch-press"
           >
             <Wrench className="w-3.5 h-3.5 text-carbon-950" />
             <span>New Job Card</span>
@@ -115,59 +115,57 @@ export default function Dashboard() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Active Jobs */}
-        <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-400">Active Detailing Jobs</span>
-            <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              <Wrench className="w-4 h-4" />
+        <div className="bg-slate-900/80 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-400">Active Jobs</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-white tracking-tight">{metrics.activeJobs}</div>
-          <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
-            <span className="text-emerald-400 font-medium">Cars in shop</span> right now
+          <div className="text-xl sm:text-3xl font-black text-white tracking-tight">{metrics.activeJobs}</div>
+          <p className="text-[10px] sm:text-xs text-slate-400 mt-1 flex items-center gap-1 truncate">
+            <span className="text-emerald-400 font-medium">Cars in shop</span>
           </p>
         </div>
 
         {/* Total Billed Revenue */}
-        <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-400">Total Billed Revenue</span>
-            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <TrendingUp className="w-4 h-4" />
+        <div className="bg-slate-900/80 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-400">Billed Revenue</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-black text-emerald-400 tracking-tight">{formatCurrency(metrics.totalRevenue)}</div>
-          <p className="text-xs text-slate-400 mt-1">
-            Collected: <span className="text-slate-200 font-medium">{formatCurrency(metrics.totalCollected)}</span>
+          <div className="text-lg sm:text-2xl font-black text-emerald-400 tracking-tight truncate">{formatCurrency(metrics.totalRevenue)}</div>
+          <p className="text-[10px] sm:text-xs text-slate-400 mt-1 truncate">
+            Paid: <span className="text-slate-200 font-medium">{formatCurrency(metrics.totalCollected)}</span>
           </p>
         </div>
 
         {/* Pending Balance */}
-        <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-400">Receivables / Balance Due</span>
-            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
-              <CreditCard className="w-4 h-4" />
+        <div className="bg-slate-900/80 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-400">Receivables</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <CreditCard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-2xl font-black text-amber-400 tracking-tight">{formatCurrency(metrics.totalPending)}</div>
-          <p className="text-xs text-slate-400 mt-1">Pending customer settlement</p>
+          <div className="text-lg sm:text-2xl font-black text-amber-400 tracking-tight truncate">{formatCurrency(metrics.totalPending)}</div>
+          <p className="text-[10px] sm:text-xs text-slate-400 mt-1 truncate">Pending payment</p>
         </div>
 
         {/* Total Registered Cars */}
-        <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-400">Total Clients & Cars</span>
-            <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-              <Users className="w-4 h-4" />
+        <div className="bg-slate-900/80 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-sm relative overflow-hidden">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-400">Clients & Cars</span>
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-white tracking-tight">{metrics.totalVehicles}</div>
-          <p className="text-xs text-slate-400 mt-1">
-            Across <span className="text-slate-200 font-medium">{metrics.totalCustomers} customer profiles</span>
-          </p>
+          <div className="text-xl sm:text-3xl font-black text-white tracking-tight">{metrics.totalVehicles}</div>
+          <p className="text-[10px] sm:text-xs text-slate-400 mt-1 truncate">Across {metrics.totalCustomers} clients</p>
         </div>
       </div>
 

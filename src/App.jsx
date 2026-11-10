@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import MobileBottomNav from './components/MobileBottomNav';
+import MobileDrawer from './components/MobileDrawer';
 import CompanyRegisterModal from './components/CompanyRegisterModal';
 import RoleLoginModal from './components/RoleLoginModal';
 
@@ -57,19 +59,29 @@ class ErrorBoundary extends React.Component {
 // Studio CRM Internal Layout
 function StudioLayout() {
   const { currentCompany } = useAuth();
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-carbon-950 font-sans">
-      {/* Navigation Sidebar */}
+    <div className="flex h-[100dvh] overflow-hidden bg-carbon-950 font-sans">
+      {/* Navigation Sidebar (Desktop) */}
       <Sidebar />
+
+      {/* Slide-over Drawer for Mobile / Tablet */}
+      <MobileDrawer 
+        isOpen={isMobileDrawerOpen} 
+        onClose={() => setIsMobileDrawerOpen(false)} 
+      />
 
       {/* Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <Navbar />
+        <Navbar onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)} />
 
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto pb-24 lg:pb-6 overscroll-contain">
           <Outlet />
         </main>
+
+        {/* Mobile Bottom Navigation Bar (Phones & Small Tablets) */}
+        <MobileBottomNav onOpenMore={() => setIsMobileDrawerOpen(true)} />
       </div>
 
       {/* Modals */}

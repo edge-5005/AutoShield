@@ -3,12 +3,54 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+    height: 100%;
+  }
+
   body {
     @apply bg-carbon-950 text-slate-100 font-sans antialiased;
+    min-height: 100dvh;
     background-image: 
       radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.05) 0px, transparent 50%),
       radial-gradient(at 0% 100%, rgba(6, 182, 212, 0.04) 0px, transparent 50%);
     background-attachment: fixed;
+  }
+
+  /* Fast responsive tapping without 300ms delay */
+  button, a, [role="button"], input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Prevent text selection on interactive controls when pressed on touchscreens */
+  button, [role="button"], .tab, .chip, .badge, .nav-item {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Prevent iOS automatic page zoom when focusing input fields */
+  @media (pointer: coarse) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Safe Area Insets for iPhone notch & modern Android navigation pills */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 8px);
+}
+
+/* Touch active haptic-feel feedback */
+@media (hover: none) and (pointer: coarse) {
+  .touch-press:active {
+    transform: scale(0.96);
+    transition: transform 100ms ease-out;
   }
 }
 

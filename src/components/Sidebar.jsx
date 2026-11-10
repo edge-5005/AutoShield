@@ -37,7 +37,7 @@ export default function Sidebar() {
   const { currentRole, isAdmin, currentCompany, setIsRoleModalOpen } = useAuth();
 
   return (
-    <aside className="w-64 bg-carbon-900 border-r border-carbon-800 flex flex-col shrink-0 no-print shadow-2xl">
+    <aside className="hidden lg:flex w-64 bg-carbon-900 border-r border-carbon-800 flex-col shrink-0 no-print shadow-2xl">
       {/* Brand Logo & Name */}
       <div className="h-16 flex items-center px-4 border-b border-carbon-800 bg-carbon-950/40">
         <NavLink to="/landing" className="hover:opacity-90 transition-opacity">

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PlusCircle, FileText, Wrench, Search, PhoneCall, Globe, Building2, Shield, UserCheck, Plus, ChevronDown } from 'lucide-react';
+import { PlusCircle, FileText, Wrench, Search, PhoneCall, Globe, Building2, Shield, UserCheck, Plus, ChevronDown, Menu } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-export default function Navbar() {
+export default function Navbar({ onOpenMobileDrawer }) {
   const navigate = useNavigate();
   const { 
     currentCompany, 
@@ -14,12 +14,22 @@ export default function Navbar() {
   } = useAuth();
 
   return (
-    <header className="h-16 bg-carbon-900 border-b border-carbon-800 px-6 flex items-center justify-between no-print z-10 shadow-md">
+    <header className="h-16 bg-carbon-900 border-b border-carbon-800 px-3 sm:px-6 flex items-center justify-between no-print z-10 shadow-md select-none">
       {/* Company Name & Role Switcher */}
-      <div className="flex items-center gap-3 min-w-0">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {/* Mobile Hamburger Menu */}
+        <button
+          onClick={onOpenMobileDrawer}
+          type="button"
+          className="lg:hidden p-2 rounded-xl text-slate-300 hover:text-amber-400 hover:bg-carbon-800 transition-colors touch-press shrink-0"
+          aria-label="Open Navigation Drawer"
+        >
+          <Menu className="w-5 h-5 text-amber-400" />
+        </button>
+
         <button
           onClick={() => setIsRoleModalOpen(true)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-carbon-950/80 hover:bg-carbon-950 border border-carbon-700/80 text-left transition-all group"
+          className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-carbon-950/80 hover:bg-carbon-950 border border-carbon-700/80 text-left transition-all group min-w-0"
           title="Click to switch company or login as Admin / Front Office"
         >
           {currentCompany?.logo_url ? (
@@ -27,7 +37,7 @@ export default function Navbar() {
           ) : (
             <Building2 className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
           )}
-          <div className="truncate max-w-[160px] sm:max-w-[240px]">
+          <div className="truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[240px]">
             <h1 className="text-xs font-bold text-white tracking-wide truncate">
               {currentCompany?.name || 'Apex Auto Detailing Studio'}
             </h1>
@@ -35,7 +45,7 @@ export default function Navbar() {
               {currentCompany?.bays_count || 4} Bays • {currentCompany?.state_name || 'India'}
             </span>
           </div>
-          <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 shrink-0 ml-1" />
+          <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 shrink-0 ml-0.5 sm:ml-1" />
         </button>
 
         {/* Current Role Badge (Clickable to switch) */}
