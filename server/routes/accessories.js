@@ -101,6 +101,18 @@ router.delete('/:id', (req, res) => {
   }
 });
 
+// Get distinct categories and brands
+router.get('/meta/taxonomy', (req, res) => {
+  try {
+    const rawCategories = db.query("SELECT DISTINCT category FROM accessories WHERE category IS NOT NULL AND TRIM(category) != '' ORDER BY category ASC");
+    const categories = rawCategories.map(r => r.category);
+    const brands = db.query("SELECT DISTINCT brand, category FROM accessories WHERE brand IS NOT NULL AND TRIM(brand) != '' ORDER BY brand ASC");
+    res.json({ categories, brands });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Restore default catalog
 router.post('/reset-defaults', (req, res) => {
   try {

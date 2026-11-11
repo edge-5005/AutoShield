@@ -431,11 +431,22 @@ export default function InvoiceEditor() {
                 }}
                 className="bg-slate-950 border border-amber-500/40 text-amber-300 rounded-xl px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-amber-400"
               >
-                <option value="">📦 + Add Car Accessory...</option>
-                {accessories.map(a => (
-                  <option key={a.id} value={a.id} disabled={a.stock_quantity <= 0}>
-                    {a.name} — ₹{a.selling_price} {a.stock_quantity <= 0 ? '(Out of Stock)' : `(${a.stock_quantity} in stock)`}
-                  </option>
+                <option value="">📦 + Add Car Accessory (By Category)...</option>
+                {Object.entries(
+                  accessories.reduce((acc, a) => {
+                    const cat = a.category || 'General Accessories';
+                    if (!acc[cat]) acc[cat] = [];
+                    acc[cat].push(a);
+                    return acc;
+                  }, {})
+                ).map(([cat, items]) => (
+                  <optgroup key={cat} label={`── ${cat} ──`}>
+                    {items.map(a => (
+                      <option key={a.id} value={a.id} disabled={a.stock_quantity <= 0}>
+                        {a.brand ? `[${a.brand}] ` : ''}{a.name} — ₹{a.selling_price} {a.stock_quantity <= 0 ? '(Out of Stock)' : `(${a.stock_quantity} in stock)`}
+                      </option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
 

@@ -76,6 +76,7 @@ export const api = {
 
   // Car Accessories
   getAccessories: (category = 'all', search = '') => request(`/accessories?category=${category}&search=${encodeURIComponent(search)}`),
+  getAccessoryTaxonomy: () => request('/accessories/meta/taxonomy'),
   createAccessory: (data) => request('/accessories', { method: 'POST', body: data }),
   updateAccessory: (id, data) => request(`/accessories/${id}`, { method: 'PUT', body: data }),
   deleteAccessory: (id) => request(`/accessories/${id}`, { method: 'DELETE' }),
