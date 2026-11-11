@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import MobileBottomNav from './components/MobileBottomNav';
 import MobileDrawer from './components/MobileDrawer';
+import BootScreen from './components/BootScreen';
 import CompanyRegisterModal from './components/CompanyRegisterModal';
 import RoleLoginModal from './components/RoleLoginModal';
 
@@ -92,8 +93,18 @@ function StudioLayout() {
 }
 
 export default function App() {
+  const [isBooting, setIsBooting] = useState(true);
+
+  useEffect(() => {
+    // Expose global replay function if user wants to re-trigger boot screen
+    window.replayBootScreen = () => setIsBooting(true);
+  }, []);
+
   return (
     <ErrorBoundary>
+      {isBooting && (
+        <BootScreen duration={3000} onComplete={() => setIsBooting(false)} />
+      )}
       <AuthProvider>
         <BrowserRouter>
           <Routes>

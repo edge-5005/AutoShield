@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, Save, Building, CreditCard, ShieldCheck, CheckCircle, Upload, Image, Trash2 } from 'lucide-react';
+import { Settings as SettingsIcon, Save, Building, CreditCard, ShieldCheck, CheckCircle, Upload, Image, Trash2, Sparkles } from 'lucide-react';
 import { api } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -411,6 +411,27 @@ export default function Settings() {
             onChange={(e) => setFormData({ ...formData, terms_conditions: e.target.value })}
             className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-blue-500 leading-relaxed"
           />
+        </div>
+
+        {/* System & Boot Screen Controls */}
+        <div className="bg-carbon-900 border border-carbon-800 rounded-2xl p-5 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <h2 className="text-sm font-bold text-white flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Animated Boot Screen & Branding</span>
+            </h2>
+            <p className="text-xs text-slate-400">
+              Replay the 3-second AutoShield Pro animated logo startup sequence with ceramic diagnostics.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => window.replayBootScreen?.()}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-carbon-950 font-black text-xs shadow-ceramic transition-all touch-press shrink-0"
+          >
+            <span>▶ Replay Boot Animation (3s)</span>
+          </button>
         </div>
 
         {/* Submit Button */}

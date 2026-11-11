@@ -102,3 +102,70 @@
     margin: 0 !important;
   }
 }
+
+/* ================= BOOT SCREEN ANIMATIONS ================= */
+@keyframes bootGleamSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  60%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes bootPulseAura {
+  0%, 100% {
+    transform: scale(0.92);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.65;
+  }
+}
+
+@keyframes bootGlintTwinkle {
+  0%, 100% {
+    transform: scale(0.85) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.35) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bootDropletGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(6, 182, 212, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.95));
+  }
+}
+
+.animate-boot-gleam {
+  animation: bootGleamSweep 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+}
+
+.animate-boot-aura {
+  animation: bootPulseAura 3s ease-in-out infinite;
+}
+
+.animate-boot-glint {
+  animation: bootGlintTwinkle 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-boot-droplet {
+  animation: bootDropletGlow 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-boot-gleam,
+  .animate-boot-aura,
+  .animate-boot-glint,
+  .animate-boot-droplet {
+    animation: none !important;
+  }
+}
